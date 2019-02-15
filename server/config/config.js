@@ -17,7 +17,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/DBLocal';
 } else {
-    urlDB = 'mongodb+srv://admin:admin@dbcluster-6w8zr.mongodb.net/test?retryWrites=true';
+    urlDB = 'mongodb+srv://admin:admin@dbcluster-6w8zr.mongodb.net/DBUdemy?retryWrites=true';
 }
 
 process.env.URLDB = urlDB;
