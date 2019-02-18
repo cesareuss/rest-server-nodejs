@@ -6,10 +6,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 //BodyPaerser
 const bodyParser = require('body-parser');
-
+//Path Aplication
+const path = require('path');
 const app = express();
 
-
+//public dir http
+app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
