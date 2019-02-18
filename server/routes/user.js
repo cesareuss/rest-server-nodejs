@@ -2,9 +2,10 @@
 const express = require('express');
 const UserModel = require('../model/userModel');
 const bcrypt = require('bcrypt');
+const { validationToken, validaAdminRole } = require('../middlewere/authentication');
 const app = express();
 
-app.get('/usuarios', function(req, res) {
+app.get('/usuarios', validationToken, function(req, res) {
     let desde = req.query.desde || 0;
     desde = Number(desde);
     UserModel.find({}, 'nombre email')
@@ -27,16 +28,16 @@ app.get('/usuarios', function(req, res) {
             })
         });
 });
-app.post('/', function(req, res) {
+app.post('/', [validationToken, validaAdminRole], function(req, res) {
 
     let body = req.body;
 
     let user = new UserModel({
         nombre: body.nombre,
         email: body.email,
-        password: bcrypt.hashSync(body.password, 10),
-        role: body.role,
-        status: body.status
+        password: bcrypt.hashSync(body.password, 10)
+            //   role: body.role,
+            // status: body.status
     });
 
     user.save((err, usuarioDB) => {
